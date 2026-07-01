@@ -75,24 +75,18 @@ function renderCertificates() {
 
   countEl.textContent = `${CERTIFICATES.length} mục`;
 
-  list.innerHTML = CERTIFICATES.map((c, i) => {
-    const ticketNo = String(i + 1).padStart(3, "0");
-    return `
+  list.innerHTML = CERTIFICATES.map((c) => `
     <article class="cert-card" data-image="${escapeHtml(c.image)}" data-title="${escapeHtml(c.title)}" tabindex="0" role="button" aria-label="Xem ảnh ${escapeHtml(c.title)}">
       <div class="cert-thumb">
         <img src="${escapeHtml(c.image)}" alt="${escapeHtml(c.title)}" loading="lazy" />
       </div>
       <div class="cert-body">
-        <div class="cert-ticket">
-          <span>#${ticketNo}</span>
-          <span class="cert-status">Verified</span>
-        </div>
         <div class="cert-title">${escapeHtml(c.title)}</div>
         <div class="cert-meta">${escapeHtml(c.issuer)} · ${escapeHtml(c.year)}</div>
         <span class="cert-type">${escapeHtml(c.type)}</span>
       </div>
-    </article>`;
-  }).join("");
+    </article>`
+  ).join("");
 
   // lightbox interactions
   const lightbox = document.getElementById("lightbox");
