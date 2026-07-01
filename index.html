@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nguyễn Hoàng Anh — IT Support Specialist</title>
+<meta name="description" content="Hồ sơ năng lực, bằng cấp và chứng chỉ của Nguyễn Hoàng Anh — Cán bộ hỗ trợ Công nghệ Thông tin." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===================== STATUS BAR ===================== -->
+<div class="statusbar">
+  <div class="wrap">
+    <div class="brand">HOANG<span>ANH</span>.DEV</div>
+    <div class="status"><span class="dot"></span>ONLINE — SẴN SÀNG NHẬN VIỆC</div>
+  </div>
+</div>
+
+<!-- ===================== HERO / MINI-CV ===================== -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="avatar-frame">
+      <img id="avatar-img" src="assets/avatar.jpg" alt="Ảnh chân dung Nguyễn Hoàng Anh" />
+      <div class="avatar-tag" id="avatar-tag"></div>
+    </div>
+    <div>
+      <div class="eyebrow">Hồ sơ năng lực</div>
+      <h1 id="profile-name"></h1>
+      <div class="role" id="profile-role"></div>
+      <p class="bio" id="profile-bio"></p>
+      <div class="contact-row" id="contact-row"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== SKILLS ===================== -->
+<section class="block" id="skills">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Kỹ năng</h2>
+      <span class="count" id="skills-count"></span>
+    </div>
+    <div class="skills-grid" id="skills-grid"></div>
+  </div>
+</section>
+
+<!-- ===================== CERTIFICATES ===================== -->
+<section class="block" id="certificates">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Bằng cấp &amp; Chứng chỉ</h2>
+      <span class="count" id="cert-count"></span>
+    </div>
+    <div class="cert-list" id="cert-list"></div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap footer-grid">
+    <div class="footer-note">© <span id="year"></span> — Trang được cập nhật liên tục khi có bằng cấp mới.</div>
+    <div class="footer-note">Made with care · Static site</div>
+  </div>
+</footer>
+
+<!-- ===================== LIGHTBOX ===================== -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close">✕ Đóng</button>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

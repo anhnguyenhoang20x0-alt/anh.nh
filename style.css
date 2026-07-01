@@ -1,0 +1,436 @@
+/* =====================================================================
+   DESIGN TOKENS
+   ===================================================================== */
+:root {
+  --bg: #0a0f1c;
+  --bg-grid: #0d1424;
+  --surface: #121b2e;
+  --surface-2: #172441;
+  --border: #223049;
+  --border-soft: #1a2740;
+
+  --accent: #38bdf8;       /* sky blue — tech / trust */
+  --accent-dim: #1f6f96;
+  --accent-2: #fbbf24;     /* amber — verified / highlight */
+  --ok: #34d399;           /* green — status ok */
+
+  --text: #e7ecf3;
+  --text-muted: #8da0bc;
+  --text-faint: #56688a;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --radius: 10px;
+  --radius-sm: 6px;
+
+  --max-w: 920px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+body {
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(56,189,248,0.10), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 20%, rgba(251,191,36,0.06), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: #06131f; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 3px rgba(52,211,153,0.18);
+}
+
+/* =====================================================================
+   TOP STATUS BAR — mô phỏng thanh trạng thái hệ thống / helpdesk console
+   ===================================================================== */
+.statusbar {
+  border-bottom: 1px solid var(--border-soft);
+  background: rgba(10,15,28,0.85);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.statusbar .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+}
+.statusbar .brand {
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.statusbar .brand span { color: var(--accent); }
+.statusbar .status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ok);
+}
+.statusbar .status .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ok);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* =====================================================================
+   HERO / MINI-CV
+   ===================================================================== */
+.hero {
+  padding: 72px 0 56px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 44px;
+  align-items: center;
+}
+.avatar-frame {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.avatar-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.02);
+}
+.avatar-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 1px rgba(56,189,248,0.25);
+}
+.avatar-tag {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: #06131f;
+  background: var(--accent);
+  padding: 4px 8px;
+  border-radius: 5px;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.hero .role {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--accent-2);
+}
+.hero .bio {
+  margin-top: 18px;
+  max-width: 56ch;
+  color: var(--text-muted);
+  font-size: 15.5px;
+}
+
+.contact-row {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 7px 12px;
+  border-radius: 999px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.pill:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.pill svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--accent); }
+
+/* =====================================================================
+   SECTIONS — shared
+   ===================================================================== */
+section.block {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+.block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+}
+.block-head h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+}
+.block-head .count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+/* =====================================================================
+   SKILLS — hiển thị như module hệ thống
+   ===================================================================== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.skill-card:hover {
+  border-color: var(--accent-dim);
+  background: var(--surface-2);
+}
+.skill-name { font-size: 14.5px; font-weight: 500; }
+.skill-level {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+  background: rgba(56,189,248,0.10);
+  border: 1px solid rgba(56,189,248,0.25);
+  padding: 3px 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+/* =====================================================================
+   CERTIFICATES — "ticket log" — điểm nhấn riêng của trang
+   ===================================================================== */
+.cert-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+.cert-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  cursor: pointer;
+}
+.cert-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-dim);
+  box-shadow: 0 12px 28px -14px rgba(56,189,248,0.35);
+}
+.cert-thumb {
+  aspect-ratio: 4 / 3;
+  background: var(--surface-2);
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.cert-thumb img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.cert-body { padding: 14px 16px 16px; }
+.cert-ticket {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-faint);
+  margin-bottom: 8px;
+}
+.cert-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ok);
+}
+.cert-status::before {
+  content: "✓";
+  font-weight: 700;
+}
+.cert-title { font-weight: 600; font-size: 15px; line-height: 1.35; }
+.cert-meta {
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+.cert-type {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  border: 1px solid rgba(251,191,36,0.3);
+  background: rgba(251,191,36,0.08);
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+
+/* empty state */
+.empty-state {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(6,10,20,0.92);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 32px;
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: min(900px, 100%);
+  max-height: 85vh;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lightbox-close:hover { border-color: var(--accent); }
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
+footer {
+  padding: 40px 0 60px;
+}
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.footer-note {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-faint);
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width: 640px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .avatar-frame { margin: 0 auto; width: 180px; height: 180px; }
+  .contact-row { justify-content: center; }
+  .hero .bio { margin-left: auto; margin-right: auto; }
+  .block-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
