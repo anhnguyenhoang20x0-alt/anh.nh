@@ -188,4 +188,12 @@ const CERTIFICATES = [
     type: "Thư cảm ơn",
     image: "assets/certs/thu-cam-on-covid-2021.jpg",
   },
+  {
+    id: "cert-018",
+    title: "ILX2: Becoming a Successful Leader (Inclusive Leadership Training)",
+    issuer: "CatalystX (Catalyst Inc.) trên nền tảng edX",
+    year: "2021",
+    type: "Chứng chỉ",
+    image: "assets/certs/chung-chi-ilx2-leadership-2021.jpg",
+  },
 ];
