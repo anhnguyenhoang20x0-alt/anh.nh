@@ -269,6 +269,40 @@ section.block {
 }
 
 /* =====================================================================
+   CERTIFICATE FILTERS
+   ===================================================================== */
+.cert-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.filter-btn {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+.filter-btn .filter-count {
+  opacity: 0.75;
+  margin-left: 4px;
+}
+
+/* =====================================================================
    CERTIFICATES
    ===================================================================== */
 .cert-list {

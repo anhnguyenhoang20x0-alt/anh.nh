@@ -59,6 +59,41 @@ function renderSkills() {
   ).join("");
 }
 
+let activeFilter = "all";
+
+function renderCertFilters() {
+  const wrap = document.getElementById("cert-filters");
+  if (!wrap) return;
+
+  if (!CERTIFICATES.length) {
+    wrap.innerHTML = "";
+    return;
+  }
+
+  const counts = {};
+  CERTIFICATES.forEach((c) => {
+    counts[c.type] = (counts[c.type] || 0) + 1;
+  });
+  const types = Object.keys(counts).sort();
+
+  const buttons = [
+    `<button class="filter-btn" data-filter="all">Tất cả <span class="filter-count">${CERTIFICATES.length}</span></button>`,
+    ...types.map(
+      (t) => `<button class="filter-btn" data-filter="${escapeHtml(t)}">${escapeHtml(t)} <span class="filter-count">${counts[t]}</span></button>`
+    ),
+  ];
+  wrap.innerHTML = buttons.join("");
+
+  wrap.querySelectorAll(".filter-btn").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.filter === activeFilter);
+    btn.addEventListener("click", () => {
+      activeFilter = btn.dataset.filter;
+      wrap.querySelectorAll(".filter-btn").forEach((b) => b.classList.toggle("active", b === btn));
+      renderCertificates();
+    });
+  });
+}
+
 function renderCertificates() {
   const list = document.getElementById("cert-list");
   const countEl = document.getElementById("cert-count");
@@ -73,9 +108,18 @@ function renderCertificates() {
     return;
   }
 
-  countEl.textContent = `${CERTIFICATES.length} mục`;
+  const filtered = activeFilter === "all"
+    ? CERTIFICATES
+    : CERTIFICATES.filter((c) => c.type === activeFilter);
 
-  list.innerHTML = CERTIFICATES.map((c) => `
+  countEl.textContent = `${filtered.length} / ${CERTIFICATES.length} mục`;
+
+  if (!filtered.length) {
+    list.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1;">Không có mục nào thuộc loại này.</div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map((c) => `
     <article class="cert-card" data-image="${escapeHtml(c.image)}" data-title="${escapeHtml(c.title)}" tabindex="0" role="button" aria-label="Xem ảnh ${escapeHtml(c.title)}">
       <div class="cert-thumb">
         <img src="${escapeHtml(c.image)}" alt="${escapeHtml(c.title)}" loading="lazy" />
@@ -126,5 +170,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 renderProfile();
 renderSkills();
+renderCertFilters();
 renderCertificates();
 setupLightboxClose();
